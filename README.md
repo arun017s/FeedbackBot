@@ -19,6 +19,7 @@ Simple Telegram Bot To Get Feedback from users & Some Other Features.
 8. `LINK_1` : Link for Start Message's First Button
 9. `BUTTON_2` : Text for Start Message's Second Button
 10. `LINK_2` : Link for Start Message's Second Button
+11. 'MONGO_URL' :Put your mongo db url
 
 #### Filling
 * `{first}` - User first name
@@ -50,6 +51,8 @@ reply - reply to user's feedback (admin only)
 send - send message to group (admin only)
 pin - send and pin that message (admin only)
 id - get chat id (only in groups)
+stats - to get number of users
+
 ```
 
 ### Usage
@@ -64,7 +67,7 @@ id - get chat id (only in groups)
 
 ## To-Do
 - Broadcast
-- Number of users
+- Number of users(done)
 - Ban & Unban
 
 # Credits
