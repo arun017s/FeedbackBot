@@ -2,6 +2,13 @@
 #okbei
 
 from details import API_ID, API_HASH, BOT_TOKEN, ADMIN, START_IMG, START_MSG, BUTTON_1, BUTTON_2, LINK_1, LINK_2                
+from pymongo import MongoClient
+from database import MONGO_URL as db_url
+
+users_db = MongoClient(db_url)['users']
+col = users_db['USER']
+grps = users_db['GROUPS']
+
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, User, Message
 
@@ -90,5 +97,23 @@ async def pin(bot, message):
 @Bot.on_message(filters.command('id') & filters.group)
 async def id(bot, message):
     await message.reply_text(f"<b>➲ Chat ID:</b> <code>{message.chat.id}</code>")
+
+@Bot.on_message(filters.command("stats"))
+async def stats(_, m: Message):
+  users = col.find({})
+  mfs = []
+  for x in users:
+    mfs.append(x['user_id'])
+    
+  total = len(mfs)
+  
+  grp = grps.find({})
+  grps_ = []
+  for x in grp:
+    grps_.append(x['chat_id'])
+    
+  total_ = len(grps_)
+  
+  await m.reply_text(f"👥 Total Users: `{total}`\n💭 Total Groups: `{total_}`")
     
 Bot.run()
